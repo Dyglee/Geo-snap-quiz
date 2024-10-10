@@ -1,0 +1,158 @@
+.container {
+    width: 80%;
+    margin: auto;
+    font-family: "Poppins", sans-serif;
+}
+
+a {
+    color: black;
+    text-decoration: none;
+}
+
+/****************************** Navbar Section **********************************/
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+}
+
+.navbar-item {
+    cursor: pointer;
+}
+
+.nav-left {
+    display: flex;
+    gap: 3rem;
+}
+
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+}
+
+.nav-logo {
+    height: 80px;
+    width: 80px;
+}
+
+.nav-right button {
+    padding: 1rem;
+    height: 3rem;
+    border-radius: 5px;
+    border: none;
+    color: white;
+    background-color: #007bff;
+    cursor: pointer;
+}
+
+.nav-right button:hover {
+    background-color: #0056b3;
+}
+
+/**************************** Hero Section **************************************/
+
+.hero-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+    background-image: url('/static/images/GeoSnap-Hero.jpg');
+    background-size: cover;
+    background-position: center;
+    border-radius: 1rem;
+    filter: brightness(80%);
+}
+
+.session-button {
+    font-size: 1.5rem;
+    padding: 1.5rem 4rem;
+    border-radius: 15px;
+    border: none;
+    color: white;
+    background-color: #28a745;
+    cursor: pointer;
+}
+
+.session-button:hover {
+    background-color: #218838;
+}
+
+/**************************** Form Section ******************************************/
+
+.form-container {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    position: absolute;
+    top: 10%;
+    padding: 40px;
+    width: 300px;
+    text-align: center;
+}
+
+.form-container input {
+    width: 90%;
+    padding: 15px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.form-container h2 {
+    text-transform: uppercase;
+}
+
+.form-container button {
+    width: 50%;
+    padding: 15px;
+    margin: 10px 0;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.form-container button:hover {
+    background-color: #0056b3;
+}
+
+.form-container .toggle-btn {
+    background-color: #28a745;
+}
+
+.form-container .toggle-btn:hover {
+    background-color: #218838;
+}
+
+/**************************** Message Container *********************************/
+
+#message-container {
+    position: fixed;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 10px 20px;
+    border-radius: 5px;
+    display: none;
+    font-size: 1.2rem;
+}
+
+#message-container.success {
+    background-color: #4CAF50;
+    color: white;
+}
+
+#message-container.error {
+    background-color: #f44336;
+    color: white;
+}
