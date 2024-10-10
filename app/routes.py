@@ -1,8 +1,8 @@
 from flask import Blueprint, render_template, request, session, redirect, url_for, jsonify
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import login_user, logout_user, login_required, current_user
-from extensions import db
-from models.user import User
+from app.extensions import db
+from app.models.user import User
 
 main_routes = Blueprint('main_routes', __name__)
 

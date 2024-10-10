@@ -1,9 +1,10 @@
 from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_login import LoginManager
-from extensions import db
+from app.extensions import db          # Use correct import path
 from app.routes import main_routes
+from app.models.user import User       # Ensure correct import path for models
+from config import Config
 
 login_manager = LoginManager()
 
@@ -15,14 +16,14 @@ def create_app():
     db.init_app(app)
     migrate = Migrate(app, db)
     login_manager.init_app(app)
-    login_manager.login_view = 'main_routes.login'  # Redirects to login page if user not authenticated
+    login_manager.login_view = 'main_routes.login'  # Redirects to login page if not authenticated
 
-    # Register routes
+    # Register blueprints
     app.register_blueprint(main_routes)
 
     return app
 
-# Define the user loader for Flask-Login
+# Flask-Login user loader
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
