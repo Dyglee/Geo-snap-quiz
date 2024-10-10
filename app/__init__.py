@@ -1,9 +1,9 @@
 from flask import Flask
 from flask_migrate import Migrate
 from flask_login import LoginManager
-from app.extensions import db          # Use correct import path
+from app.extensions import db
 from app.routes import main_routes
-from app.models.user import User       # Ensure correct import path for models
+from app.models.user import User
 from config import Config
 
 login_manager = LoginManager()

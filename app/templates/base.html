@@ -16,11 +16,12 @@
         <!-- Navbar -->
         <nav>
             <div class="nav-left">
-                <!-- Add any left-side navbar items (like links) here if needed -->
+                <!-- Add left-side navbar items  -->
             </div>
             <div class="nav-right">
                 {% if current_user.is_authenticated %}
-                    <button onclick="window.location.href='{{ url_for('main_routes.logout') }}'">Logout</button>
+                    <p>Welcome, {{ current_user.username }}!</p>
+                    <button onclick="window.location.href='{{ url_for('main_routes.logout') }}';">Logout</button>
                 {% else %}
                     <button class="sign-in" onclick="showForm('login')">Login</button>
                     <button class="sign-up" onclick="showForm('signup')">Sign up</button>
@@ -29,7 +30,7 @@
             </div>
         </nav>
 
-        <!-- Sign in/Sign up forms will overlay here -->
+        <!-- Sign in/Sign up forms -->
         {% if not current_user.is_authenticated %}
             <section class="hero-section">
                 <div class="form-container" id="login-form-container">
@@ -44,20 +45,17 @@
 
                 <div class="form-container" id="signup-form-container" style="display: none;">
                     <h2>Signup for GeoSnap</h2>
-                    <form action="{{ url_for('main_routes.signup') }}" method="POST">
+                    <form action="{{ url_for('main_routes.signup') }}" method="POST" onsubmit="return validateSignupForm()">
                         <input type="text" id="username" name="username" placeholder="Username" required>
                         <input type="email" id="signup-email" name="email" placeholder="Email" required>
+                        <input type="email" id="confirm-email" name="confirm-email" placeholder="Confirm Email" required>
                         <input type="password" id="signup-password" name="password" placeholder="Password" required>
+                        <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirm Password" required>
                         <button type="submit">Signup</button>
                     </form>
                     <button class="toggle-btn" onclick="showForm('login')">Switch to Login</button>
                 </div>
             </section>
-        {% else %}
-            <!-- Redirect user to quiz or other page -->
-            <script>
-                window.location.href = "{{ url_for('main_routes.quiz') }}";
-            </script>
         {% endif %}
     </div>
 </body>

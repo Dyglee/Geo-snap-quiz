@@ -11,7 +11,6 @@ function showForm(formType) {
     }
 }
 
-// Optional form validation function for signup form
 function validateSignupForm() {
     const email = document.getElementById('signup-email').value;
     const confirmEmail = document.getElementById('confirm-email').value;
@@ -28,5 +27,5 @@ function validateSignupForm() {
         return false;
     }
 
-    return true;  // If validation passes, allow form submission
+    return true;  // Allow form submission if validation passes
 }

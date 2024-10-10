@@ -2,23 +2,24 @@
 __pycache__/
 *.py[cod]
 *.pyo
+*.pyd
 
-# Virtual environment folder
+# Virtual environment
 venv/
 
-# Local SQLite database
+# Local SQLite database (if you use SQLite for development)
 instance/*.db
 instance/*.sqlite3
 
 # Flask-Migrate migration files
 migrations/
 
-# Environment variables
+# Environment variables and secrets
 .env
-.env.*
+*.env
 
 # Jupyter Notebook checkpoints
 .ipynb_checkpoints/
 
-# macOS Finder metadata
+# macOS Finder files
 .DS_Store
