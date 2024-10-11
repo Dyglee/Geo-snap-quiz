@@ -65,13 +65,24 @@ def login():
 @main_routes.route('/quiz')
 @login_required
 def quiz():
+    # Render the initial quiz page
+    return render_template('quiz.html')
+
+@main_routes.route('/get_question', methods=['GET'])
+@login_required
+def get_question():
+    # Get a random country and image
     correct_country, image_path = get_random_country_image()
-    
-    # Step 2: Generate quiz options
+
+    # Generate quiz options
     quiz_options = generate_quiz_options(correct_country)
-    
-    # Render the quiz page with the image and options
-    return render_template('quiz.html', image_path=image_path, quiz_options=quiz_options, correct_country=correct_country)
+
+    # Return the quiz data as JSON
+    return jsonify({
+        'image_path': url_for('static', filename=image_path),
+        'quiz_options': quiz_options,
+        'correct_country': correct_country
+    })
 
 @main_routes.route('/logout')
 def logout():

@@ -5,34 +5,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GeoSnap Quiz</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="container">
-        <h2>Which country does this image belong to?</h2>
-        
-        <!-- Display the quiz image -->
-        <img class="quiz-img" src="{{ url_for('static', filename=image_path) }}" alt="Country Image" style="width:600px;height:auto;">
+        <!-- Navigation bar -->
+        <nav>
+            <div class="nav-left">
+                <!-- Add left-side navbar items if needed -->
+            </div>
+            <div class="nav-right">
+                <p>Welcome, {{ current_user.username }}!</p>
+                <button onclick="window.location.href='{{ url_for('main_routes.logout') }}';" class="logout-btn">Logout</button>
+            </div>
+        </nav>
 
-        <!-- Display the quiz options as buttons -->
-        <div class="quiz-options">
-            {% for option in quiz_options %}
-                <button onclick="checkAnswer('{{ option }}')">{{ option }}</button>
-            {% endfor %}
+        <!-- Initial content with Start Quiz button -->
+        <div id="start-quiz-section" style="text-align: center; margin-top: 15%;">
+            <h1>Welcome to the GeoSnap Quiz!</h1>
+            <button id="start-quiz-btn" class="start-quiz-btn">Start Quiz</button>
+        </div>
+
+        <!-- Quiz content (initially hidden) -->
+        <div id="quiz-section" style="display: none; text-align: center;">
+            <h2>Which country does this image belong to?</h2>
+
+            <!-- Display the quiz image -->
+            <img id="quiz-image" class="quiz-img" src="" alt="Country Image" style="width:800px;height:600px;object-fit: cover;object-position:center; ">
+
+            <!-- Display the quiz options as buttons -->
+            <div id="quiz-options" class="quiz-options"></div>
         </div>
     </div>
 
-    <script>
-        function checkAnswer(selectedCountry) {
-            const correctCountry = "{{ correct_country }}";
-            if (selectedCountry === correctCountry) {
-                alert("Correct!");
-            } else {
-                alert("Incorrect! The correct answer was " + correctCountry);
-            }
-        }
-    </script>
+    <!-- Include the scripts -->
+    <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
 </body>
 </html>
