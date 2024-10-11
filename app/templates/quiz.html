@@ -16,6 +16,7 @@
             <div class="nav-right">
                 <p>Welcome, {{ current_user.username }}!</p>
                 <button onclick="window.location.href='{{ url_for('main_routes.logout') }}';" class="logout-btn">Logout</button>
+                <img class="nav-logo" src="{{ url_for('static', filename='images/logo.png') }}" alt="GeoSnap Logo">
             </div>
         </nav>
 
@@ -30,7 +31,7 @@
             <h2>Which country does this image belong to?</h2>
 
             <!-- Display the quiz image -->
-            <img id="quiz-image" class="quiz-img" src="" alt="Country Image" style="width:800px;height:600px;object-fit: cover;object-position:center; ">
+            <img id="quiz-image" class="quiz-img" src="" alt="Country Image" style="width:900px;height:600px;object-fit: cover;object-position:center; ">
 
             <!-- Display the quiz options as buttons -->
             <div id="quiz-options" class="quiz-options"></div>

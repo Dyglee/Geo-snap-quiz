@@ -15,7 +15,7 @@ def get_random_country_image():
     country_path = os.path.join(IMAGE_DIR, selected_country)
     
     # Get all image files in the selected country folder (supports png, jpg, jfif)
-    image_files = [f for f in os.listdir(country_path) if f.endswith(('png', 'jpg', 'jfif'))]
+    image_files = [f for f in os.listdir(country_path) if f.endswith(('png', 'jpg', 'jfif', 'webp', 'jpeg'))]
     
     # Select a random image file from the folder
     selected_image = random.choice(image_files)
