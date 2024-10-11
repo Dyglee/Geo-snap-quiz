@@ -21,7 +21,10 @@
             <div class="nav-right">
                 {% if current_user.is_authenticated %}
                     <p>Welcome, {{ current_user.username }}!</p>
-                    <button onclick="window.location.href='{{ url_for('main_routes.logout') }}';">Logout</button>
+                    <button onclick="window.location.href='{{ url_for('main_routes.logout') }}';" class="logout-btn">Logout</button>
+                    <button onclick="window.location.href='{{ url_for('main_routes.quiz') }}';">
+                        Start Quiz
+                    </button>
                 {% else %}
                     <button class="sign-in" onclick="showForm('login')">Login</button>
                     <button class="sign-up" onclick="showForm('signup')">Sign up</button>
