@@ -3,6 +3,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import login_user, logout_user, login_required, current_user
 from app.extensions import db
 from app.models.user import User
+from app.utils import get_random_country_image, generate_quiz_options
 
 main_routes = Blueprint('main_routes', __name__)
 
@@ -64,7 +65,13 @@ def login():
 @main_routes.route('/quiz')
 @login_required
 def quiz():
-    return render_template('quiz.html')
+    correct_country, image_path = get_random_country_image()
+    
+    # Step 2: Generate quiz options
+    quiz_options = generate_quiz_options(correct_country)
+    
+    # Render the quiz page with the image and options
+    return render_template('quiz.html', image_path=image_path, quiz_options=quiz_options, correct_country=correct_country)
 
 @main_routes.route('/logout')
 def logout():

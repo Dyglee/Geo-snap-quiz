@@ -11,24 +11,28 @@
 </head>
 <body>
     <div class="container">
-        <!-- Navigation bar (optional) -->
-        <nav>
-            <div class="nav-left">
-                <!-- Add left-side navbar items if needed -->
-            </div>
-            <div class="nav-right">
-                <p>Welcome, {{ current_user.username }}!</p>
-                <button onclick="window.location.href='{{ url_for('main_routes.logout') }}';" class="logout-btn">Logout</button>
-            </div>
-        </nav>
+        <h2>Which country does this image belong to?</h2>
+        
+        <!-- Display the quiz image -->
+        <img class="quiz-img" src="{{ url_for('static', filename=image_path) }}" alt="Country Image" style="width:600px;height:auto;">
 
-        <!-- Centered Start Quiz Button -->
-        <div class="quiz-container">
-            <h1>Welcome to the GeoSnap Quiz!</h1>
-            <button id="start-quiz-btn" class="start-quiz-btn">Start Quiz</button>
+        <!-- Display the quiz options as buttons -->
+        <div class="quiz-options">
+            {% for option in quiz_options %}
+                <button onclick="checkAnswer('{{ option }}')">{{ option }}</button>
+            {% endfor %}
         </div>
     </div>
 
-    <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+    <script>
+        function checkAnswer(selectedCountry) {
+            const correctCountry = "{{ correct_country }}";
+            if (selectedCountry === correctCountry) {
+                alert("Correct!");
+            } else {
+                alert("Incorrect! The correct answer was " + correctCountry);
+            }
+        }
+    </script>
 </body>
 </html>

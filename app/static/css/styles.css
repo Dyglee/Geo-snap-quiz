@@ -178,3 +178,22 @@ nav {
 .start-quiz-btn:hover {
     background-color: #218838;
 }
+.quiz-img img{
+    max-width: 100%;
+    height: auto;
+    margin: 20px 0;
+}
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    margin: 10px;
+    cursor: pointer;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
