@@ -1,35 +1,3 @@
-function showForm(formType) {
-    const loginForm = document.getElementById('login-form-container');
-    const signupForm = document.getElementById('signup-form-container');
-
-    if (formType === 'login') {
-        loginForm.style.display = 'block';
-        signupForm.style.display = 'none';
-    } else if (formType === 'signup') {
-        signupForm.style.display = 'block';
-        loginForm.style.display = 'none';
-    }
-}
-
-function validateSignupForm() {
-    const email = document.getElementById('signup-email').value;
-    const confirmEmail = document.getElementById('confirm-email').value;
-    const password = document.getElementById('signup-password').value;
-    const confirmPassword = document.getElementById('confirm-password').value;
-
-    if (email !== confirmEmail) {
-        alert('Emails do not match!');
-        return false;
-    }
-
-    if (password !== confirmPassword) {
-        alert('Passwords do not match!');
-        return false;
-    }
-
-    return true;  // Allow form submission if validation passes
-}
-
 document.addEventListener("DOMContentLoaded", function() {
     const startQuizBtn = document.getElementById("start-quiz-btn");
     const startQuizSection = document.getElementById("start-quiz-section");
@@ -44,9 +12,10 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Event listener to start the quiz
     startQuizBtn.addEventListener("click", function() {
-        startQuizSection.style.display = "none";  // Hide start button section
-        quizSection.style.display = "block";      // Show quiz section
-        loadNextQuestion();                       // Load the first question
+        startQuizSection.style.display = "none";
+        quizSection.style.display = "block";
+        resetQuiz();
+        loadNextQuestion();
     });
 
     // Function to fetch and display the next question
@@ -56,30 +25,43 @@ document.addEventListener("DOMContentLoaded", function() {
             fetch("/get_question")
                 .then(response => response.json())
                 .then(data => {
-                    // Display the new image and options
-                    quizImage.src = data.image_path;  // Directly assign the correct image path
-                    quizOptionsContainer.innerHTML = '';  // Clear previous options
+                    if (data.error) {
+                        alert(data.error);  // Show error if no more images are available
+                    } else {
+                        // Display the new image and options
+                        quizImage.src = data.image_path;
+                        quizOptionsContainer.innerHTML = '';  // Clear previous options
 
-                    data.quiz_options.forEach(option => {
-                        const optionButton = document.createElement('button');
-                        optionButton.textContent = option;
-                        optionButton.classList.add('option-btn');
-                        optionButton.addEventListener('click', function() {
-                            checkAnswer(option, data.correct_country);
+                        data.quiz_options.forEach(option => {
+                            const optionButton = document.createElement('button');
+                            optionButton.textContent = option;
+                            optionButton.classList.add('option-btn');
+                            optionButton.addEventListener('click', function() {
+                                checkAnswer(option, data.correct_country);
+                            });
+                            quizOptionsContainer.appendChild(optionButton);
                         });
-                        quizOptionsContainer.appendChild(optionButton);
-                    });
-                });
+                    }
+                })
+                .catch(error => console.error('Error fetching question:', error));  // Error handling
         } else {
-            // End the quiz and show the score
+            // End the quiz after 20 questions
             endQuiz();
         }
     }
 
-    // Function to check the answer and update the score
+    // Function to reset the quiz data on the server
+    function resetQuiz() {
+        fetch("/reset_quiz", { method: 'POST' })
+            .then(response => response.json())
+            .then(data => console.log(data.message))  // Handle reset response
+            .catch(error => console.error('Error resetting quiz:', error));
+    }
+
+    // Function to check the selected answer and update the score
     function checkAnswer(selectedCountry, correctCountry) {
         if (selectedCountry === correctCountry) {
-            score++;  // Increase score for correct answer
+            score++;
         }
 
         questionNumber++;  // Move to the next question

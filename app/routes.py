@@ -41,7 +41,7 @@ def signup():
     db.session.add(new_user)
     db.session.commit()
 
-    # Explicitly clear the session after signup
+    # Clear the session after signup
     session.clear()
 
     # Redirect to login page after successful signup (no auto login)
@@ -71,18 +71,37 @@ def quiz():
 @main_routes.route('/get_question', methods=['GET'])
 @login_required
 def get_question():
-    # Get a random country and image
-    correct_country, image_path = get_random_country_image()
+    # Retrieve the list of used images from the session or initialize an empty list
+    used_images = session.get('used_images', [])
 
-    # Generate quiz options
-    quiz_options = generate_quiz_options(correct_country)
+    try:
+        # Get a random country and image, avoiding used images
+        correct_country, image_path = get_random_country_image(used_images)
 
-    # Return the quiz data as JSON
-    return jsonify({
-        'image_path': url_for('static', filename=image_path),
-        'quiz_options': quiz_options,
-        'correct_country': correct_country
-    })
+        # Mark the image as used by appending it to the session's used_images list
+        used_images.append(f'{correct_country}/{image_path.split("/")[-1]}')
+        session['used_images'] = used_images  # Update session
+
+        # Generate quiz options
+        quiz_options = generate_quiz_options(correct_country)
+
+        # Return the quiz data as JSON
+        return jsonify({
+            'image_path': url_for('static', filename=image_path),
+            'quiz_options': quiz_options,
+            'correct_country': correct_country
+        })
+
+    except Exception as e:
+        # Handle the case where no more images are available
+        return jsonify({'error': str(e)}), 400
+
+@main_routes.route('/reset_quiz', methods=['POST'])
+@login_required
+def reset_quiz():
+    # Clear the used images from the session
+    session.pop('used_images', None)
+    return jsonify({'message': 'Quiz reset'}), 200
 
 @main_routes.route('/logout')
 def logout():
