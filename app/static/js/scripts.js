@@ -1,3 +1,17 @@
+function showForm(formType) {
+    const loginForm = document.getElementById('login-form-container');
+    const signupForm = document.getElementById('signup-form-container');
+
+    if (formType === 'login') {
+        loginForm.style.display = 'block';
+        signupForm.style.display = 'none';
+    } else if (formType === 'signup') {
+        signupForm.style.display = 'block';
+        loginForm.style.display = 'none';
+    }
+}
+
+
 document.addEventListener("DOMContentLoaded", function() {
     const startQuizBtn = document.getElementById("start-quiz-btn");
     const startQuizSection = document.getElementById("start-quiz-section");

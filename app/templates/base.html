@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GeoSnap Quiz</title>
-    <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
     <link rel="icon" href="{{ url_for('static', filename='images/logo.jpg') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -45,7 +44,15 @@
                     </form>
                     <button class="toggle-btn" onclick="showForm('signup')">Switch to Signup</button>
                 </div>
-
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <ul class="flash-messages">
+            {% for category, message in messages %}
+                <li class="flash {{ category }}">{{ message }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+        {% endwith %}
                 <div class="form-container" id="signup-form-container" style="display: none;">
                     <h2>Signup for GeoSnap</h2>
                     <form action="{{ url_for('main_routes.signup') }}" method="POST" onsubmit="return validateSignupForm()">
@@ -61,5 +68,6 @@
             </section>
         {% endif %}
     </div>
+    <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
 </body>
 </html>
