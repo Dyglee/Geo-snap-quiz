@@ -21,11 +21,11 @@ def signup():
 
     # Validate email and password
     if email != confirm_email:
-        flash('Emails do not match!')
+        flash('Emails do not match!', 'error')
         return redirect(url_for('main_routes.index'))
 
     if password != confirm_password:
-        flash('Passwords do not match!')
+        flash('Passwords do not match!', 'error')
         return redirect(url_for('main_routes.index'))
 
     hashed_password = generate_password_hash(password)
@@ -33,7 +33,7 @@ def signup():
     # Check if the user already exists
     user_exists = User.query.filter_by(email=email).first()
     if user_exists:
-        flash('User already exists!')
+        flash('User already exists!', 'error')
         return redirect(url_for('main_routes.index'))
 
     # Create a new user
@@ -45,7 +45,7 @@ def signup():
     session.clear()
 
     # Redirect to login page after successful signup (no auto login)
-    flash('Account created successfully! Please log in.')
+    flash('Account created successfully! Please log in.', 'success')
     return redirect(url_for('main_routes.index'))
 
 
@@ -57,9 +57,10 @@ def login():
 
     if user and check_password_hash(user.password, password):
         login_user(user)
+        flash('Logged in successfully!', 'success')  # Success message for login
         return redirect(url_for('main_routes.quiz'))
 
-    flash('Invalid credentials')
+    flash('Invalid credentials', 'error')
     return redirect(url_for('main_routes.index'))
 
 @main_routes.route('/quiz')
@@ -80,7 +81,7 @@ def get_question():
 
         # Mark the image as used by appending it to the session's used_images list
         used_images.append(f'{correct_country}/{image_path.split("/")[-1]}')
-        session['used_images'] = used_images  # Update session
+        session['used_images'] = used_images
 
         # Generate quiz options
         quiz_options = generate_quiz_options(correct_country)
@@ -94,6 +95,7 @@ def get_question():
 
     except Exception as e:
         # Handle the case where no more images are available
+        flash('No more images available for the quiz.', 'warning')
         return jsonify({'error': str(e)}), 400
 
 @main_routes.route('/reset_quiz', methods=['POST'])
@@ -101,10 +103,12 @@ def get_question():
 def reset_quiz():
     # Clear the used images from the session
     session.pop('used_images', None)
+    flash('Quiz reset successfully.', 'info')
     return jsonify({'message': 'Quiz reset'}), 200
 
 @main_routes.route('/logout')
 def logout():
     logout_user()
     session.clear()
+    flash('You have been logged out.', 'info')
     return redirect(url_for('main_routes.index'))

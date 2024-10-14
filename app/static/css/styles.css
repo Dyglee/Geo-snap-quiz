@@ -198,6 +198,46 @@ button:hover {
     background-color: #0056b3;
 }
 
+/* Flash message container */
+.flash-messages {
+    list-style-type: none;
+    padding: 0;
+    margin: 20px 0;
+}
+
+/* General styling for all alerts */
+.alert {
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    font-size: 16px;
+    text-align: center;
+}
+
+/* Success message styling */
+.alert.success {
+    background-color: #4CAF50;
+    color: white;
+}
+
+/* Error message styling */
+.alert.error {
+    background-color: #f44336;
+    color: white;
+}
+
+/* Warning message styling */
+.alert.warning {
+    background-color: #ff9800;
+    color: white;
+}
+
+/* Info message styling */
+.alert.info {
+    background-color: #2196F3;
+    color: white;
+}
+
 
 @media (max-width: 575.98px) {
 
