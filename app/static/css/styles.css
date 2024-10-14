@@ -6,6 +6,7 @@
     background-position: center;
     margin: auto;
     font-family: "Poppins", sans-serif;
+    overflow: hidden;
 }
 
 a {
@@ -64,21 +65,6 @@ nav {
     border-radius: 1rem;
     filter: brightness(80%);
 }
-
-.session-button {
-    font-size: 1.5rem;
-    padding: 1.5rem 4rem;
-    border-radius: 15px;
-    border: none;
-    color: white;
-    background-color: #28a745;
-    cursor: pointer;
-}
-
-.session-button:hover {
-    background-color: #218838;
-}
-
 /**************************** Form Section ******************************************/
 
 .form-container {
@@ -134,30 +120,6 @@ nav {
     background-color: #218838;
 }
 
-/*************************** Message Container *********************************/
-
-#message-container {
-    position: fixed;
-    top: 10px;
-    left: 50%;
-    transform: translateX(-50%);
-    padding: 10px 20px;
-    border-radius: 5px;
-    display: none;
-    font-size: 1.2rem;
-}
-
-#message-container.success {
-    background-color: #4CAF50;
-    color: white;
-}
-
-#message-container.error {
-    background-color: #f44336;
-    color: white;
-}
-
-
 /************************* Quiz Page ************************************/
 
 .quiz-container {
@@ -179,6 +141,8 @@ nav {
     background-color: #218838;
 }
 .quiz-img img{
+    object-fit:cover;
+    object-position: center;
     max-width: 100%;
     height: auto;
     margin: 20px 0;
@@ -240,7 +204,20 @@ button:hover {
 
 
 @media (max-width: 575.98px) {
-
+    .container {
+        width: 100%;
+        min-height: 100vh;
+        height: 100%;
+        background-image: url('/static/images/GeoSnap-Hero.jpg');
+        background-size: cover;
+        background-position: center;
+        margin: auto;
+        font-family: "Poppins", sans-serif;
+        overflow: hidden;
+    }
+    #start-quiz-section{
+        margin-top: 55% !important;
+    }
 }
 
 @media (min-width: 576px) and (max-width: 767.98px) {
