@@ -4,6 +4,10 @@
 
 GeoSnap Quiz is a fun, interactive web application that tests users' knowledge of countries around the world by presenting them with images and asking them to identify the correct country. The app allows users to sign up, log in, and challenge themselves through a geography quiz. Each quiz session consists of 20 questions, and users earn points for each correct answer.
 
+## Website
+
+Visit the live app here: [GeoSnap Quiz](https://geo-snap-quiz.onrender.com)
+
 ## Features
 
 - **User Authentication:** Secure signup, login, and logout functionalities.
@@ -78,3 +82,29 @@ GeoSnap Quiz is a fun, interactive web application that tests users' knowledge o
     ```
 
 The app will be available at `http://127.0.0.1:5000/` in your browser.
+
+## Usage
+
+- **Signup and Login:**  
+  Create an account and log in to access the quiz page.
+
+- **Start a Quiz:**  
+  Begin a quiz session with random images of countries. Select the country name from the options provided.
+
+- **View Results:**  
+  At the end of the quiz, your score will be displayed, showing how many questions you answered correctly out of 20.
+
+## Future Improvements
+
+- **Leaderboard:**  
+  Implement a leaderboard feature to rank users based on their quiz scores.
+
+- **Difficulty Levels:**  
+  Add quiz categories for different difficulty levels (e.g., by continent or region).
+
+- **Timer Feature:**  
+  Add a timer for each question to make the quiz more challenging.
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
